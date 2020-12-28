@@ -1,0 +1,3 @@
+include ':adobecolor'
+include ':app'
+rootProject.name = "Adobe Color"
