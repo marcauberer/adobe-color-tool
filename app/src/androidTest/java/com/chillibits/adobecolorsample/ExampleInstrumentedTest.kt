@@ -1,4 +1,4 @@
-package com.chillibits.adobecolor
+package com.chillibits.adobecolorsample
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

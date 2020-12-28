@@ -1,4 +1,4 @@
-package com.chillibits.adobecolor
+package com.chillibits.adobecolorsample
 
 import org.junit.Test
 

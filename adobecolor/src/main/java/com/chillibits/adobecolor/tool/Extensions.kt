@@ -2,8 +2,9 @@
  * Copyright © Marc Auberer 2020. All rights reserved
  */
 
-package com.chillibits.adobecolor.core
+package com.chillibits.adobecolor.tool
 
+import com.chillibits.adobecolor.core.ColorBinaryGenerator
 import com.chillibits.adobecolor.model.AdobeColor
 
 // -------------------------------------------- ACO --------------------------------------------

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Adobe Color</string>
+    <string name="export_colors">Export Colors</string>
 </resources>

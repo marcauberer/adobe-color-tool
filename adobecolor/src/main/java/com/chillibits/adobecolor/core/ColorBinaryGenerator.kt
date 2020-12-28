@@ -68,7 +68,7 @@ class ColorBinaryGenerator {
         result += 0.to2Bytes() // 0 (constant)
         result += name.length.to2Bytes() // Name length
         for (c in name) result += c.toInt().to2Bytes() // Name
-        result += 0.to2Bytes() // 0 (constant)
+        //result += 0.to2Bytes() // 0 (constant)
         return result
     }
 }
