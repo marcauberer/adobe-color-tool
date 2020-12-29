@@ -10,10 +10,7 @@ import android.util.Log
 import androidx.core.content.FileProvider
 import com.chillibits.adobecolor.R
 import com.chillibits.adobecolor.model.AdobeColor
-import com.chillibits.adobecolor.tool.toACOBytes
-import com.chillibits.adobecolor.tool.toASEBytes
 import java.io.IOException
-import java.net.URLConnection
 
 class AdobeColorExporter(
     private val context: Context

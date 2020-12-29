@@ -14,11 +14,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.chillibits.adobecolor.core.AdobeColorExporter
-import com.chillibits.adobecolor.tool.toACOBytes
+import com.chillibits.adobecolor.core.toACOBytes
 import com.chillibits.adobecolor.model.AdobeColor
 import com.chillibits.adobecolor.tool.printBytesPretty
-import com.chillibits.adobecolor.tool.to4Bytes
-import com.chillibits.adobecolor.tool.toASEBytes
+import com.chillibits.adobecolor.core.toASEBytes
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,11 +33,11 @@ class MainActivity : AppCompatActivity() {
 
         // Prepare colors
         colors = listOf(
-            AdobeColor("ad0d34", getIntFromColor(173, 13, 52)),
-            AdobeColor("c77a31", getIntFromColor(199, 122, 49)),
-            AdobeColor("d46b54", getIntFromColor(212, 107, 84)),
-            AdobeColor("d7525f", getIntFromColor(215, 82, 95)),
-            AdobeColor("f10f6b", getIntFromColor(241, 15, 107))
+            AdobeColor("ad0d34", getIntFromRGB(173, 13, 52)),
+            AdobeColor("c77a31", getIntFromRGB(199, 122, 49)),
+            //AdobeColor("d46b54", getIntFromColor(212, 107, 84)),
+            //AdobeColor("d7525f", getIntFromColor(215, 82, 95)),
+            AdobeColor("f10f6b", getIntFromRGB(241, 15, 107))
         )
         Log.d("AC", "ACO: " + colors.toACOBytes().printBytesPretty())
         Log.d("AC", "ASE: " + colors.toASEBytes("Imaginary").printBytesPretty())
@@ -77,8 +76,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun exportColorsASE() {
-        AdobeColorExporter(this).exportColorListAsASE(colors, "ColorConverter")
+        AdobeColorExporter(this).exportColorListAsASE(colors, "AdobeColorTool")
     }
 
-    private fun getIntFromColor(red: Int, green: Int, blue: Int) = Color.rgb(red, green, blue)
+    private fun getIntFromRGB(red: Int, green: Int, blue: Int) = Color.rgb(red, green, blue)
 }

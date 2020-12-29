@@ -2,7 +2,7 @@
  * Copyright © Marc Auberer 2020. All rights reserved
  */
 
-package com.chillibits.adobecolor.tool
+package com.chillibits.adobecolor.core
 
 import com.chillibits.adobecolor.generator.ACOBinaryGenerator
 import com.chillibits.adobecolor.generator.ASEBinaryGenerator
