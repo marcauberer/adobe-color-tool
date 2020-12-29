@@ -14,7 +14,7 @@ import com.chillibits.adobecolor.tool.to4Bytes
  * More information here:
  * - https://www.cyotek.com/blog/reading-adobe-swatch-exchange-ase-files-using-csharp
  * - https://www.cyotek.com/blog/writing-adobe-swatch-exchange-ase-files-using-csharp
- * http://www.selapa.net/swatches/colors/fileformats.php#adobe_ase
+ * - http://www.selapa.net/swatches/colors/fileformats.php#adobe_ase
  */
 class ASEBinaryGenerator {
 
@@ -100,9 +100,9 @@ class ASEBinaryGenerator {
         for (c in name) result += c.toInt().to2Bytes() // Color name
         result += ByteArray(1)
         result += colorModel // Color model
-        result += color.red.toFloat().to4Bytes() // Color value red
-        result += color.green.toFloat().to4Bytes() // Color value green
-        result += color.blue.toFloat().to4Bytes() // Color value blue
+        result += (color.red / 255f).to4Bytes() // Color value red
+        result += (color.green / 255f).to4Bytes() // Color value green
+        result += (color.blue / 255f).to4Bytes() // Color value blue
         result += colorType.value.to2Bytes() // Color type
         return result
     }

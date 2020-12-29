@@ -22,29 +22,28 @@ class AdobeColorExporter(
 
     fun exportColorListAsACO(colors: List<AdobeColor>) {
         val bytes = colors.toACOBytes()
-        writeToFileAndShare(bytes, EXT.ACO)
+        writeToFileAndShare(bytes, "export", EXT.ACO)
     }
 
     fun exportColorListAsASE(colors: List<AdobeColor>) {
         val bytes = colors.toASEBytes()
-        writeToFileAndShare(bytes, EXT.ASE)
+        writeToFileAndShare(bytes, "export", EXT.ASE)
     }
 
     fun exportColorListAsASE(colors: List<AdobeColor>, paletteName: String) {
-        Log.d("AC", colors.size.toString())
         val bytes = colors.toASEBytes(paletteName)
-        writeToFileAndShare(bytes, EXT.ASE)
+        writeToFileAndShare(bytes, paletteName, EXT.ASE)
     }
 
-    private fun writeToFileAndShare(data: ByteArray, ext: EXT) {
+    private fun writeToFileAndShare(data: ByteArray, filename: String, ext: EXT) {
         try {
             // Write to file
-            val out = context.openFileOutput("export.${ext.value}", Context.MODE_PRIVATE)
+            val out = context.openFileOutput("$filename.${ext.value}", Context.MODE_PRIVATE)
             out.write(data)
             out.close()
             val uri = FileProvider.getUriForFile(
                 context, "com.chillibits.adobecolor",
-                context.getFileStreamPath("export.${ext.value}")
+                context.getFileStreamPath("$filename.${ext.value}")
             )
             // Share
             val i = Intent(Intent.ACTION_SEND).apply {

@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun exportColorsASE() {
-        AdobeColorExporter(this).exportColorListAsASE(colors, "Imaginary")
+        AdobeColorExporter(this).exportColorListAsASE(colors, "ColorConverter")
     }
 
     private fun getIntFromColor(red: Int, green: Int, blue: Int) = Color.rgb(red, green, blue)
