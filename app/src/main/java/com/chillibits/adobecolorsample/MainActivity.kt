@@ -22,14 +22,14 @@ class MainActivity : AppCompatActivity() {
     private val PERMISSION_REQUEST_CODE = 10001
 
     // Variables as objects
-    private val colors = ArrayList<AdobeColor>()
+    private lateinit var colors: List<AdobeColor>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         // Prepare colors
-        val colors = listOf(
+        colors = listOf(
             AdobeColor("ad0d34", getIntFromColor(173, 13, 52)),
             AdobeColor("c77a31", getIntFromColor(199, 122, 49)),
             AdobeColor("d46b54", getIntFromColor(212, 107, 84)),
@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun exportColorsASE() {
-        AdobeColorExporter(this).exportColorListAsASE(colors)
+        AdobeColorExporter(this).exportColorListAsASE(colors, "Imaginary")
     }
 
     private fun getIntFromColor(red: Int, green: Int, blue: Int) = Color.rgb(red, green, blue)
