@@ -31,6 +31,6 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: simplesettings/build/dokka/html
+          FOLDER: adobecolor/build/dokka/html
           TARGET_FOLDER: docs
           CLEAN: true
