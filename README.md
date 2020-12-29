@@ -25,6 +25,7 @@ val colors = listOf(
 )
 AdobeColorExporter(this).exportColorListAsACO(colors)
 ```
+*Note: Before you call the `exportColorListAsACO` function, you have to request the `WRITE_EXTERNAL_STORAGE` permission. Otherwise, the app will crash with an error.*
 
 And in the ASE format like this:
 ```kotlin
