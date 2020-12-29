@@ -26,7 +26,7 @@ class ASEBinaryGenerator {
 
     enum class ColorModel(val value: String) {
         CMYK("CMYK"),
-        RGB("RGB"),
+        RGB("RGB "),
         GRAY("Gray")
     }
 
@@ -86,23 +86,23 @@ class ASEBinaryGenerator {
      * Byte 3-6: Block length
      * Byte 7+8: Name length
      * Following Bytes: UTF-16 decoding of color name
-     * Next 4 Bytes: Color model (CMYK / 0RGB / Gray)
+     * Next 4 Bytes: Color model (CMYK / RGB / Gray)
      * Next n Bytes: Color values (CMYK => n = 4, RGB => n = 3, Gray => n = 1)
      * Next 2 Bytes: Color type (0 = Global, 1 = Spot, 2 = Normal)
      */
     fun getColorBlockBody(color: Int, name: String, colorType: ColorType): ByteArray {
         val colorModel = ByteArray(1) + ColorModel.RGB.value.toByteArray(Charsets.UTF_8)
-        val nameLength = name.length +1 // TODO: Check if +1 is required
-        val blockLength = 2 + nameLength * 2 + 4 + 3 + 2
+        val nameLength = name.length +1
+        val blockLength = 2 + nameLength * 2 + 4 + 12 + 2
         var result = BlockType.COLOR.value.to2Bytes() // Block type
         result += blockLength.to4Bytes() // Block length
         result += nameLength.to2Bytes() // Name length
         for (c in name) result += c.toInt().to2Bytes() // Color name
-        result += ByteArray(2) // Color name ending
+        result += ByteArray(1)
         result += colorModel // Color model
-        result += color.red.to4Bytes() // Color value red
-        result += color.green.to4Bytes() // Color value green
-        result += color.blue.to4Bytes() // Color value blue
+        result += color.red.toFloat().to4Bytes() // Color value red
+        result += color.green.toFloat().to4Bytes() // Color value green
+        result += color.blue.toFloat().to4Bytes() // Color value blue
         result += colorType.value.to2Bytes() // Color type
         return result
     }

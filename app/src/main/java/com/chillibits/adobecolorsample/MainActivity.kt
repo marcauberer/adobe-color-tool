@@ -13,6 +13,7 @@ import com.chillibits.adobecolor.core.AdobeColorExporter
 import com.chillibits.adobecolor.tool.toACOBytes
 import com.chillibits.adobecolor.model.AdobeColor
 import com.chillibits.adobecolor.tool.printBytesPretty
+import com.chillibits.adobecolor.tool.to4Bytes
 import com.chillibits.adobecolor.tool.toASEBytes
 
 class MainActivity : AppCompatActivity() {
