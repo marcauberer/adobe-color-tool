@@ -1,3 +1,7 @@
+<!--
+  ~ Copyright © Marc Auberer 2020. All rights reserved
+  -->
+
 <resources>
     <string name="app_name">Adobe Color</string>
     <string name="export_colors_aco">Export Colors as ACO</string>

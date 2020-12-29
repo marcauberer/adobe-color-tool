@@ -4,14 +4,14 @@
 
 package com.chillibits.adobecolor.tool
 
-import com.chillibits.adobecolor.core.ACOBinaryGenerator
-import com.chillibits.adobecolor.core.ASEBinaryGenerator
+import com.chillibits.adobecolor.generator.ACOBinaryGenerator
+import com.chillibits.adobecolor.generator.ASEBinaryGenerator
 import com.chillibits.adobecolor.model.AdobeColor
 
 // -------------------------------------------- ACO --------------------------------------------
 
 /**
- * Extension function for Map<String, Int> representing Map<<name>, <color>> to convert it
+ * Extension function for List<AdobeColor> to convert it
  * to a byte array, which can be written to a aco file / stream.
  */
 fun List<AdobeColor>.toACOBytes(): ByteArray {
@@ -34,10 +34,18 @@ fun List<AdobeColor>.toACOBytes(): ByteArray {
     return result
 }
 
+/**
+ * Extension function for List<AdobeColor> to convert it
+ * to a ACO encoded string, which can be exported to a file
+ */
 fun List<AdobeColor>.toACOString() = toACOBytes().toString()
 
 // -------------------------------------------- ASE --------------------------------------------
 
+/**
+ * Extension function for List<AdobeColor> to convert it
+ * to a byte array, which can be written to a aco file / stream.
+ */
 fun List<AdobeColor>.toASEBytes(): ByteArray {
     val binGen = ASEBinaryGenerator()
 
@@ -49,6 +57,11 @@ fun List<AdobeColor>.toASEBytes(): ByteArray {
     return result
 }
 
+/**
+ * Extension function for List<AdobeColor> to convert it
+ * to a byte array, which can be written to a aco file / stream.
+ * You can use it with a custom palette name.
+ */
 fun List<AdobeColor>.toASEBytes(paletteName: String): ByteArray {
     val binGen = ASEBinaryGenerator()
 
@@ -62,4 +75,8 @@ fun List<AdobeColor>.toASEBytes(paletteName: String): ByteArray {
     return result
 }
 
+/**
+ * Extension function for List<AdobeColor> to convert it
+ * to a ASE encoded string, which can be exported to a file
+ */
 fun List<AdobeColor>.toASEString() = toASEBytes().toString()

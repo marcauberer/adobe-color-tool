@@ -1,0 +1,36 @@
+# Workflow for Android CI release
+
+name: Publish to Bintray
+
+on:
+  release:
+    types: [ published ]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false  # Avoids messing up PagesDeployAction
+      - name: Configure JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Make gradlew executable
+        run: chmod +x gradlew
+      - name: Publish library
+        env:
+          bintrayUser: ${{ secrets.BINTRAY_USERNAME }}
+          bintrayApiKey: ${{ secrets.BINTRAY_API_KEY }}
+        run: ./gradlew clean build bintrayUpload dokkaHtml
+      - name: Deploy Documentation
+        uses: JamesIves/github-pages-deploy-action@3.6.2
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: simplesettings/build/dokka/html
+          TARGET_FOLDER: docs
+          CLEAN: true

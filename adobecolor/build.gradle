@@ -1,6 +1,14 @@
+/*
+ * Copyright © Marc Auberer 2020. All rights reserved
+ */
+
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
+    id 'com.jfrog.bintray'
+    id 'maven-publish'
+    id 'android-maven'
+    id 'org.jetbrains.dokka'
 }
 
 android {
@@ -11,8 +19,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 30
         versionCode 1
-        versionName "1.0"
-
+        versionName library_version
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -43,4 +50,129 @@ dependencies {
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+}
+
+dokkaHtml.configure {
+    dokkaSourceSets {}
+}
+
+ext {
+    bintrayRepo = 'adobecolortool'
+
+    // Name which will be visible on bintray
+    bintrayName = 'AdobeColorTool'
+
+    // Library Details
+    publishedGroupId = 'com.chillibits'
+    libraryName = 'Adobe Color Tool'
+    artifact = 'adobecolortool'
+    libraryDescription = 'Android library for exporting colors to the Adobe ACO and ASE color formats.'
+    libraryVersion = library_version
+
+    // Repository Links
+    siteUrl = 'https://github.com/marcauberer/adobe-color-tool'
+    gitUrl = 'https://github.com/marcauberer/adobe-color-tool.git'
+    githubRepository= 'marcauberer/adobe-color-tool'
+
+    // Developer Details
+    developerId = 'marcauberer'
+    developerName = 'Marc Auberer'
+    developerEmail = 'marc.auberer@chillibits.com'
+
+    // License Details
+    licenseName = 'The MIT License'
+    licenseUrl = 'https://opensource.org/licenses/MIT'
+    allLicenses = ["MIT"]
+}
+
+group = publishedGroupId
+
+install {
+    repositories.mavenInstaller {
+        // Generate pom.xml with proper parameters
+        pom {
+            project {
+                packaging 'aar'
+
+                groupId publishedGroupId
+                artifactId = artifact
+                name libraryName
+                description = libraryDescription
+                url siteUrl
+
+                licenses {
+                    license {
+                        name licenseName
+                        url licenseUrl
+                    }
+                }
+                developers {
+                    developer {
+                        id developerId
+                        name developerName
+                        email developerEmail
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
+        }
+    }
+}
+
+// Avoid Kotlin docs error
+tasks.withType(Javadoc) {
+    enabled = false
+}
+
+// Remove javadoc related tasks
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+// https://github.com/bintray/gradle-bintray-plugin
+bintray {
+    user = System.getenv("bintrayUser")
+    key = System.getenv("bintrayApiKey")
+
+    configurations = ['archives']
+    pkg {
+        repo = bintrayRepo
+        name = "$publishedGroupId:$artifact"
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = allLicenses
+        publish = true
+        publicDownloadNumbers = true
+        version {
+            name = libraryVersion
+            desc = libraryDescription
+            released  = new Date()
+            vcsTag = libraryVersion
+            attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
+        }
+    }
+    filesSpec {
+        from 'adobecolortool/build/outputs/aar/adobecolortool-release.aar'
+        into '.'
+        version libraryVersion
+    }
 }

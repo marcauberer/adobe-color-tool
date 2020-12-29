@@ -2,7 +2,7 @@
  * Copyright © Marc Auberer 2020. All rights reserved
  */
 
-package com.chillibits.adobecolor.core
+package com.chillibits.adobecolor.generator
 
 import androidx.core.graphics.blue
 import androidx.core.graphics.green

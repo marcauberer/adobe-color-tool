@@ -1,3 +1,7 @@
+/*
+ * Copyright © Marc Auberer 2020. All rights reserved
+ */
+
 package com.chillibits.adobecolorsample
 
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
