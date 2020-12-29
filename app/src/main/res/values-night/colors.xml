@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © Marc Auberer 2020. All rights reserved
+  -->
+
+<resources>
+    <color name="colorPrimaryVariant">#272727</color>
+    <color name="colorPrimaryDarkVariant">#373737</color>
+</resources>

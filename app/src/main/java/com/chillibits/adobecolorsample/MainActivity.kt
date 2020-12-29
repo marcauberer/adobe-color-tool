@@ -31,6 +31,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Initialize toolbar
+        setSupportActionBar(findViewById(R.id.toolbar))
+
         // Prepare colors
         colors = listOf(
             AdobeColor("ad0d34", getIntFromRGB(173, 13, 52)),
