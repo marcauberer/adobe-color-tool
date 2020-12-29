@@ -10,9 +10,11 @@ import androidx.core.graphics.red
 import com.chillibits.adobecolor.tool.to2Bytes
 
 /**
- * More information here: http://www.nomodes.com/aco.html
+ * More information here:
+ * - http://www.nomodes.com/aco.html
+ * - https://www.adobe.com/devnet-apps/photoshop/fileformatashtml/#50577411_pgfId-1055819
  */
-class ColorBinaryGenerator {
+class ACOBinaryGenerator {
 
     enum class ProtocolVersion(val value: Int) {
         V1(1),
@@ -57,7 +59,6 @@ class ColorBinaryGenerator {
      * Byte 10+11: 0 (constant)
      * Byte 12+13: name length in binary
      * Following Bytes: UTF-16 decoding of color name
-     * Last 2 Bytes: 0 (constant)
      */
     fun getColorBytesV2(color: Int, name: String): ByteArray {
         var result = 0.to2Bytes() // RGB color space
@@ -68,7 +69,6 @@ class ColorBinaryGenerator {
         result += 0.to2Bytes() // 0 (constant)
         result += name.length.to2Bytes() // Name length
         for (c in name) result += c.toInt().to2Bytes() // Name
-        //result += 0.to2Bytes() // 0 (constant)
         return result
     }
 }

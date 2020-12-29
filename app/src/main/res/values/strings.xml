@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Adobe Color</string>
-    <string name="export_colors">Export Colors</string>
+    <string name="export_colors_aco">Export Colors as ACO</string>
+    <string name="export_colors_ase">Export Colors as ASE</string>
 </resources>
