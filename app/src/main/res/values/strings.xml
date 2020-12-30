@@ -6,4 +6,7 @@
     <string name="app_name">Adobe Color</string>
     <string name="export_colors_aco">Export Colors as ACO</string>
     <string name="export_colors_ase">Export Colors as ASE</string>
+    <string name="import_colors">Import Colors</string>
+    <string name="import_completed">Import completed</string>
+    <string name="import_cancelled">Import cancelled</string>
 </resources>

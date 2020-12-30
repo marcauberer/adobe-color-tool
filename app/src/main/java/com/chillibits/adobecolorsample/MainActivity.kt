@@ -4,16 +4,21 @@
 
 package com.chillibits.adobecolorsample
 
+import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.chillibits.adobecolor.core.AdobeColorExporter
+import com.chillibits.adobecolor.core.AdobeColorTool
 import com.chillibits.adobecolor.core.toACOBytes
 import com.chillibits.adobecolor.model.AdobeColor
 import com.chillibits.adobecolor.tool.printBytesPretty
@@ -22,7 +27,9 @@ import com.chillibits.adobecolor.core.toASEBytes
 class MainActivity : AppCompatActivity() {
 
     // Constants
-    private val PERMISSION_REQUEST_CODE = 10001
+    private val PERMISSON_EXPORT_ACO = 10001
+    private val PERMISSON_EXPORT_ASE = 10002
+    private val PERMISSON_IMPORT = 10003
 
     // Variables as objects
     private lateinit var colors: List<AdobeColor>
@@ -50,14 +57,21 @@ class MainActivity : AppCompatActivity() {
             if (ContextCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 exportColorsACO()
             } else {
-                ActivityCompat.requestPermissions(this, arrayOf(WRITE_EXTERNAL_STORAGE), PERMISSION_REQUEST_CODE)
+                ActivityCompat.requestPermissions(this, arrayOf(WRITE_EXTERNAL_STORAGE), PERMISSON_EXPORT_ACO)
             }
         }
         findViewById<Button>(R.id.exportColorsASE).setOnClickListener {
             if (ContextCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 exportColorsASE()
             } else {
-                ActivityCompat.requestPermissions(this, arrayOf(WRITE_EXTERNAL_STORAGE), PERMISSION_REQUEST_CODE)
+                ActivityCompat.requestPermissions(this, arrayOf(WRITE_EXTERNAL_STORAGE), PERMISSON_EXPORT_ASE)
+            }
+        }
+        findViewById<Button>(R.id.importColors).setOnClickListener {
+            if (ContextCompat.checkSelfPermission(this, READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                importColors()
+            } else {
+                ActivityCompat.requestPermissions(this, arrayOf(READ_EXTERNAL_STORAGE), PERMISSON_IMPORT)
             }
         }
     }
@@ -68,18 +82,38 @@ class MainActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == PERMISSION_REQUEST_CODE && grantResults.isNotEmpty() &&
-            grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            when (requestCode) {
+                PERMISSON_EXPORT_ACO -> exportColorsACO()
+                PERMISSON_EXPORT_ASE -> exportColorsASE()
+                PERMISSON_IMPORT -> importColors()
+            }
             exportColorsACO()
         }
     }
 
     private fun exportColorsACO() {
-        AdobeColorExporter(this).exportColorListAsACO(colors)
+        AdobeColorTool(this).exportColorListAsACO(colors)
     }
 
     private fun exportColorsASE() {
-        AdobeColorExporter(this).exportColorListAsASE(colors, "AdobeColorTool")
+        AdobeColorTool(this).exportColorListAsASE(colors, "AdobeColorTool")
+    }
+
+    private fun importColors() {
+        AdobeColorTool(this).importColorList(this, object: AdobeColorTool.AdobeImportListener {
+            override fun onComplete(colors: List<AdobeColor>) {
+                Log.d("AC", colors[0].name)
+                Log.d("AC", colors[1].name)
+                Log.d("AC", colors[2].name)
+
+                Toast.makeText(this@MainActivity, R.string.import_completed, Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onCancel() {
+                Toast.makeText(this@MainActivity, R.string.import_cancelled, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun getIntFromRGB(red: Int, green: Int, blue: Int) = Color.rgb(red, green, blue)

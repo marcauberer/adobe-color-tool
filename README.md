@@ -31,7 +31,7 @@ Also you have to declare a file provider in your manifest, which should look sim
 ```
 Remember to replace `com.chillibits.adobecolorsample` with your package name.
 
-Furthermore, create the file in your `res/xml/file_paths.xml` directory with the file path rules of the file provider:
+Furthermore, please create  the following file in your `res/xml/file_paths.xml` directory to specify the file path rules of the file provider:
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
@@ -47,17 +47,17 @@ val colors = listOf(
     AdobeColor("c77a31", Color.rgb(199, 122, 49)),
     AdobeColor("f10f6b", Color.rgb(241, 15, 107))
 )
-AdobeColorExporter(this).exportColorListAsACO(colors)
+AdobeColorTool(this).exportColorListAsACO(colors)
 ```
 *Note: Before you call the `exportColorListAsACO` function, you have to request the `WRITE_EXTERNAL_STORAGE` permission. Otherwise, the app will crash with an error.*
 
 And in the ASE format like this:
 ```kotlin
-AdobeColorExporter(this).exportColorListAsASE(colors)
+AdobeColorTool(this).exportColorListAsASE(colors)
 ```
 The ASE format is also capable of saving the palette name (to be exact the group name). This can be done like this:
 ```kotlin
-AdobeColorExporter(this).exportColorListAsASE(colors, "My palette")
+AdobeColorTool(this).exportColorListAsASE(colors, "My palette")
 ```
 
 ## More technical information

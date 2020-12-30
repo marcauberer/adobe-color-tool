@@ -5,4 +5,5 @@
 
 <resources>
     <string name="export_adobe_palette">Export Adobe Palette</string>
+    <string name="import_adobe_palette">Import Adobe Palette</string>
 </resources>
