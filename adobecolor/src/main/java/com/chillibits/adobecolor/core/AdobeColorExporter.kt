@@ -43,7 +43,7 @@ class AdobeColorExporter(
             out.write(data)
             out.close()
             val uri = FileProvider.getUriForFile(
-                context, "com.chillibits.adobecolor",
+                context, context.packageName,
                 context.getFileStreamPath("$filename.${ext.value}")
             )
             // Share

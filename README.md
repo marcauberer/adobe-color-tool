@@ -12,7 +12,31 @@ If you want to test the library, please visit the sample app on [Google Play](ht
 ## Usage
 The first step for using this library is, to add it to the dependency section in your project:
 ```gradle
-implementation 'com.chillibits:adobecolortool:1.0.0-alpha01'
+implementation 'com.chillibits:adobecolortool:1.0.0-alpha02'
+```
+Also you have to declare a file provider in your manifest, which should look similar to this one:
+```xml
+<application>
+    <!-- ... -->
+    <provider
+        android:name="androidx.core.content.FileProvider"
+        android:authorities="com.chillibits.adobecolorsample"
+        android:exported="false"
+        android:grantUriPermissions="true">
+        <meta-data
+            android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/file_paths" />
+    </provider>
+</application>
+```
+Remember to replace `com.chillibits.adobecolorsample` with your package name.
+
+Furthermore, create the file in your `res/xml/file_paths.xml` directory with the file path rules of the file provider:
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <files-path path="/" name="allfiles" />
+</paths>
 ```
 
 The colors have to be provided as variable of the type `List<AdobeColor>`. <br>
