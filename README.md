@@ -50,16 +50,13 @@ val colors = listOf(
 )
 AdobeColorTool(this).exportColorListAsACO(colors)
 ```
-*Note: Before you call the `exportColorListAsACO` function, you have to request the `WRITE_EXTERNAL_STORAGE` permission. Otherwise, the app will crash with an error.*
+*Note: Before you call the `exportColorListAsACO` function, you have to request the `WRITE_EXTERNAL_STORAGE` permission. Otherwise, the app crashes with an error.*
 
 And in the ASE format like this:
 ```kotlin
 AdobeColorTool(this).exportColorListAsASE(colors)
 ```
-The ASE format is also capable of saving the palette name (to be exact the group name). This can be done like this:
-```kotlin
-AdobeColorTool(this).exportColorListAsASE(colors, "My palette")
-```
+Both methods can also be called with a second parameter of type `String` to define a name for your color palette. This name will be set as file name for the respective output file and will also be applied to be the ASE group name.
 
 ## Import colors
 You can call the `importColorList` method to bring up a dialog for picking a single ACO or ASE file.

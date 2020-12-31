@@ -92,7 +92,9 @@ class AdobeColorTool(
                 result?.data?.data?.let {
                     activity.contentResolver.openInputStream(it)?.let { data ->
                         val bytes = getBytes(data)
-                        bytes.toColorList()?.let { listener.onComplete(it) }
+                        bytes.toColorList()?.let { list ->
+                            listener.onComplete(list)
+                        }
                         listener.onCancel()
                     }
 

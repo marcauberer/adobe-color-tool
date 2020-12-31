@@ -18,17 +18,17 @@ import com.chillibits.adobecolor.parser.ASEBinaryParser
  * Which one is used, will be determined automatically
  */
 fun ByteArray.toColorList(): List<AdobeColor>? {
-    val acoParser = ACOBinaryParser()
-    val aseParser = ASEBinaryParser()
+    val acoParser = ACOBinaryParser(this)
+    val aseParser = ASEBinaryParser(this)
     // Determine if it is a ACO or ASE encoded byte array or something other
     if (acoParser.isACO(this)) {
         // ACO format
         Log.i("AC", "ACO detected")
-        return acoParser.parse(this)
+        return acoParser.parse()
     } else if(aseParser.isASE(this)) {
         // ASE format
         Log.i("AC", "ASE detected")
-        return aseParser.parse(this)
+        return aseParser.parse()
     }
     // Other file type => cancel
     Log.e("AC", "Other file format => cancelling")
