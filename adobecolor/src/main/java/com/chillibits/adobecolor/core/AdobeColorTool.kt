@@ -87,13 +87,17 @@ class AdobeColorTool(
                 result?.data?.data?.let {
                     activity.contentResolver.openInputStream(it)?.let { data ->
                         val bytes = getBytes(data)
-
+                        bytes.toColorList()?.let { listener.onComplete(it) }
+                        listener.onCancel()
                     }
 
                 }
+                listener.onCancel()
             }
 
-            override fun onFailed(result: Result?) {}
+            override fun onFailed(result: Result?) {
+                listener.onCancel()
+            }
         })
     }
 

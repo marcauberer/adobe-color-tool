@@ -39,13 +39,14 @@ Furthermore, please create  the following file in your `res/xml/file_paths.xml` 
 </paths>
 ```
 
+## Export colors
 The colors have to be provided as variable of the type `List<AdobeColor>`. <br>
 This list of colors can then be exported in ACO format like this:
 ```kotlin
 val colors = listOf(
-    AdobeColor("ad0d34", Color.rgb(173, 13, 52)),
-    AdobeColor("c77a31", Color.rgb(199, 122, 49)),
-    AdobeColor("f10f6b", Color.rgb(241, 15, 107))
+    AdobeColor(Color.rgb(173, 13, 52), "ad0d34"),
+    AdobeColor(Color.rgb(199, 122, 49), "c77a31"),
+    AdobeColor(Color.rgb(241, 15, 107), "f10f6b")
 )
 AdobeColorTool(this).exportColorListAsACO(colors)
 ```
@@ -60,7 +61,22 @@ The ASE format is also capable of saving the palette name (to be exact the group
 AdobeColorTool(this).exportColorListAsASE(colors, "My palette")
 ```
 
-## More technical information
+## Import colors
+You can call the `importColorList` method to bring up a dialog for picking a single ACO or ASE file.
+```kotlin
+AdobeColorTool(this).importColorList(this, object: AdobeColorTool.AdobeImportListener {
+    override fun onComplete(colors: List<AdobeColor>) {
+        /* Your code */
+    }
+
+    override fun onCancel() {
+        /* Your code */
+    }
+})
+```
+The selected file will automatically be analyzed, whether it is a ACO or ASE file and you get back a object of type `List<AdobeColor>` in the `onComplete` callback method.
+
+## More in-depth technical information
 The following remarks are based on the following data:
 - Palette name: `AdobeColorTool`
 - Colors:

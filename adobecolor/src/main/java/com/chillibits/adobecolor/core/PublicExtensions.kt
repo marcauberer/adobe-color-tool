@@ -4,9 +4,36 @@
 
 package com.chillibits.adobecolor.core
 
+import android.util.Log
 import com.chillibits.adobecolor.generator.ACOBinaryGenerator
 import com.chillibits.adobecolor.generator.ASEBinaryGenerator
 import com.chillibits.adobecolor.model.AdobeColor
+import com.chillibits.adobecolor.parser.ACOBinaryParser
+import com.chillibits.adobecolor.parser.ASEBinaryParser
+
+// ------------------------------------------ General ------------------------------------------
+
+/**
+ * Extension function for ByteArray to convert it to a color list, using the ACO or ASE encoding.
+ * Which one is used, will be determined automatically
+ */
+fun ByteArray.toColorList(): List<AdobeColor>? {
+    val acoParser = ACOBinaryParser()
+    val aseParser = ASEBinaryParser()
+    // Determine if it is a ACO or ASE encoded byte array or something other
+    if (acoParser.isACO(this)) {
+        // ACO format
+        Log.i("AC", "ACO detected")
+        return acoParser.parse(this)
+    } else if(aseParser.isASE(this)) {
+        // ASE format
+        Log.i("AC", "ASE detected")
+        return aseParser.parse(this)
+    }
+    // Other file type => cancel
+    Log.e("AC", "Other file format => cancelling")
+    return null
+}
 
 // -------------------------------------------- ACO --------------------------------------------
 

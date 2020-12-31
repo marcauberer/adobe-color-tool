@@ -18,6 +18,11 @@ fun Int.to4Bytes() = ByteArray(4).apply {
     set(3, (this@to4Bytes and 0xFF).toByte())
 }
 
+fun from2Bytes(b_2: Byte, b_1: Byte) = (b_2.toInt() shl 8) + b_1.toInt()
+
+fun from4Bytes(b_8: Byte, b_4: Byte, b_2: Byte, b_1: Byte) =
+    (b_8.toInt() shl 24) + (b_4.toInt() shl 16) + (b_2.toInt() shl 8) + b_1.toInt()
+
 fun Float.to4Bytes(): ByteArray = ByteBuffer.allocate(4).putFloat(this).array()
 
 fun ByteArray.printBytesPretty() = StringBuilder().apply {
