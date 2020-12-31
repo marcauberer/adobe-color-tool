@@ -40,6 +40,11 @@ class AdobeColorTool(
         writeToFileAndShare(bytes, "export", EXT.ACO)
     }
 
+    fun exportColorListAsACO(colors: List<AdobeColor>, paletteName: String) {
+        val bytes = colors.toACOBytes()
+        writeToFileAndShare(bytes, paletteName, EXT.ACO)
+    }
+
     fun exportColorListAsASE(colors: List<AdobeColor>) {
         val bytes = colors.toASEBytes()
         writeToFileAndShare(bytes, "export", EXT.ASE)
