@@ -55,12 +55,16 @@ class ACOBinaryParser(data: ByteArray) {
 
     private fun parseV1ColorBlock() {
         val colorSpace = pop2BytesFront()
-        val w = pop2BytesFront()
-        val x = pop2BytesFront()
-        val y = pop2BytesFront()
-        val z = pop2BytesFront()
+        pop1ByteFront()
+        val w = pop1ByteFront()
+        pop1ByteFront()
+        val x = pop1ByteFront()
+        pop1ByteFront()
+        val y = pop1ByteFront()
+        pop1ByteFront()
+        val z = pop1ByteFront()
         val color = when (colorSpace) {
-            ColorSpace.RGB.value -> Color.rgb(w / 256, x / 256, y / 256)
+            ColorSpace.RGB.value -> Color.rgb(w, x, y)
             else -> 0
         }
         colors.add(AdobeColor(color))
@@ -68,23 +72,39 @@ class ACOBinaryParser(data: ByteArray) {
 
     private fun parseV2ColorBlock() {
         val colorSpace = pop2BytesFront()
-        val w = pop2BytesFront()
-        val x = pop2BytesFront()
-        val y = pop2BytesFront()
-        val z = pop2BytesFront()
+        pop1ByteFront()
+        val w = pop1ByteFront()
+        pop1ByteFront()
+        val x = pop1ByteFront()
+        pop1ByteFront()
+        val y = pop1ByteFront()
+        pop1ByteFront()
+        val z = pop1ByteFront()
         val color = when (colorSpace) {
-            ColorSpace.RGB.value -> Color.rgb(w / 256, x / 256, y / 256)
+            ColorSpace.RGB.value -> Color.rgb(w, x, y)
             else -> 0
         }
         pop2BytesFront() // Constant 0
         val nameLength = pop2BytesFront()
         var name = ""
-        for (i in 0 until nameLength) name += pop2BytesFront().toChar()
+        for (i in 0 until nameLength) name += String(pop2BytesFrontByteArray(), Charsets.UTF_16)
         colors.add(AdobeColor(color, name))
+    }
+
+    private fun pop1ByteFront(): Int {
+        val value = stack[0].toInt()
+        stack = stack.sliceArray(1 until stack.size)
+        return value
     }
 
     private fun pop2BytesFront(): Int {
         val value = from2Bytes(stack[0], stack[1])
+        stack = stack.sliceArray(2 until stack.size)
+        return value
+    }
+
+    private fun pop2BytesFrontByteArray(): ByteArray {
+        val value = stack.sliceArray(0 until 2)
         stack = stack.sliceArray(2 until stack.size)
         return value
     }

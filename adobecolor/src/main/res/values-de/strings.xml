@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © Marc Auberer 2021. All rights reserved
+  -->
+
+<resources>
+    <string name="export_adobe_palette">Adobe Palette exportieren</string>
+    <string name="import_adobe_palette">Adobe Palette importieren</string>
+</resources>

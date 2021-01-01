@@ -45,7 +45,7 @@ class ASEBinaryParser(data: ByteArray) {
         pop4BytesFront() // Block length = nameLength + 2
         val nameLength = pop2BytesFront()
         currentName = ""
-        for (i in 0 until nameLength -1) currentName += pop2BytesFront().toChar()
+        for (i in 0 until nameLength -1) currentName += String(pop2BytesFrontByteArray(), Charsets.UTF_16)
         pop2BytesFront()
     }
 
@@ -59,7 +59,7 @@ class ASEBinaryParser(data: ByteArray) {
         pop4BytesFront() // Block length
         val nameLength = pop2BytesFront()
         var name = ""
-        for (i in 0 until nameLength -1) name += pop2BytesFront().toChar()
+        for (i in 0 until nameLength -1) name += String(pop2BytesFrontByteArray(), Charsets.UTF_16)
         pop2BytesFront()
         var colorModel = ""
         for (i in 0 until 4) colorModel += pop1ByteFront().toChar()
@@ -94,6 +94,12 @@ class ASEBinaryParser(data: ByteArray) {
 
     private fun pop2BytesFront(): Int {
         val value = from2Bytes(stack[0], stack[1])
+        stack = stack.sliceArray(2 until stack.size)
+        return value
+    }
+
+    private fun pop2BytesFrontByteArray(): ByteArray {
+        val value = stack.sliceArray(0 until 2)
         stack = stack.sliceArray(2 until stack.size)
         return value
     }
