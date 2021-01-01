@@ -18,6 +18,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.blue
+import androidx.core.graphics.green
+import androidx.core.graphics.red
 import com.chillibits.adobecolor.core.AdobeColorTool
 import com.chillibits.adobecolor.core.toACOBytes
 import com.chillibits.adobecolor.model.AdobeColor
@@ -102,6 +105,9 @@ class MainActivity : AppCompatActivity() {
         AdobeColorTool(this).importColorList(this, object: AdobeColorTool.AdobeImportListener {
             override fun onComplete(colors: Map<String, List<AdobeColor>>) {
                 Log.d("AC", colors.toString())
+                Log.d("AC", colors["ACO Import"]?.get(0)?.color?.red.toString())
+                Log.d("AC", colors["ACO Import"]?.get(0)?.color?.green.toString())
+                Log.d("AC", colors["ACO Import"]?.get(0)?.color?.blue.toString())
 
                 Toast.makeText(this@MainActivity, R.string.import_completed, Toast.LENGTH_SHORT).show()
             }

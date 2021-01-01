@@ -23,13 +23,13 @@ fun ByteArray.toColorList(): Map<String, List<AdobeColor>>? {
     // Determine if it is a ACO or ASE encoded byte array or something other
     if (acoParser.isACO(this)) {
         // ACO format
-        Log.i("AC", "ACO detected")
+        Log.i("AC", "ACO detected. Parsing ...")
         val result = HashMap<String, List<AdobeColor>>()
         result["ACO Import"] = acoParser.parse()
         return result
     } else if(aseParser.isASE(this)) {
         // ASE format
-        Log.i("AC", "ASE detected")
+        Log.i("AC", "ASE detected. Parsing ...")
         return aseParser.parse()
     }
     // Other file type => cancel

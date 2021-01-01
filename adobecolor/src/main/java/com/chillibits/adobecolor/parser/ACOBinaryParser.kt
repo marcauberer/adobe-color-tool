@@ -60,7 +60,7 @@ class ACOBinaryParser(data: ByteArray) {
         val y = pop2BytesFront()
         val z = pop2BytesFront()
         val color = when (colorSpace) {
-            ColorSpace.RGB.value -> Color.rgb(w, x, y)
+            ColorSpace.RGB.value -> Color.rgb(w / 256, x / 256, y / 256)
             else -> 0
         }
         colors.add(AdobeColor(color))
@@ -73,7 +73,7 @@ class ACOBinaryParser(data: ByteArray) {
         val y = pop2BytesFront()
         val z = pop2BytesFront()
         val color = when (colorSpace) {
-            ColorSpace.RGB.value -> Color.rgb(w, x, y)
+            ColorSpace.RGB.value -> Color.rgb(w / 256, x / 256, y / 256)
             else -> 0
         }
         pop2BytesFront() // Constant 0
