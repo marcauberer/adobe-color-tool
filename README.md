@@ -12,7 +12,7 @@ If you want to test the library, please visit the sample app on [Google Play](ht
 ## Usage
 The first step for using this library is, to add it to the dependency section in your project:
 ```gradle
-implementation 'com.chillibits:adobecolortool:1.0.0-alpha02'
+implementation 'com.chillibits:adobecolortool:1.0.0-alpha03'
 ```
 Also you have to declare a file provider in your manifest, which should look similar to this one:
 ```xml
