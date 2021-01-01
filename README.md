@@ -2,6 +2,7 @@
 [![Download](https://api.bintray.com/packages/marcauberer/adobecolortool/com.chillibits%3Aadobecolortool/images/download.svg)](https://bintray.com/marcauberer/adobecolortool/com.chillibits%3Aadobecolortool/_latestVersion)
 ![Android CI](https://github.com/marcauberer/adobe-color-tool/workflows/Android%20CI/badge.svg)
 [![API](https://img.shields.io/badge/API-19%2B-red.svg?style=flat)](https://android-arsenal.com/api?level=19)
+[![Article on Medium](https://aleen42.github.io/badges/src/medium.svg)](https://medium.com/p/d29e43fde8eb)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 Adobe Color Tool is a library for transforming lists of colors to binary strings / byte arrays in Adobe ACO / ASE format.
@@ -12,7 +13,7 @@ If you want to test the library, please visit the sample app on [Google Play](ht
 ## Usage
 The first step for using this library is, to add it to the dependency section in your project:
 ```gradle
-implementation 'com.chillibits:adobecolortool:1.0.0-alpha03'
+implementation 'com.chillibits:adobecolortool:1.0.0-alpha04'
 ```
 Also you have to declare a file provider in your manifest, which should look similar to this one:
 ```xml
@@ -72,7 +73,7 @@ AdobeColorTool(this).importColorList(this, object: AdobeColorTool.AdobeImportLis
 })
 ```
 The selected file will automatically be analyzed, whether it is a ACO or ASE file and you get back a object of type `Map<String, List<AdobeColor>>` in the `onComplete` callback method.
-The map will contain key value pairs, which stand for all imported color groups. The key is the group name and the value is a list of type `AdobeColor` with the actual color values.
+The map will contain key value pairs, which represents all imported color groups. The key is the group name and the value is a list of type `AdobeColor` with the actual color values.
 An import of the ACO format will result in a single color group with the name `ACO Import`, containing all color values.
 
 ## More in-depth technical information
