@@ -62,7 +62,7 @@ Both methods can also be called with a second parameter of type `String` to defi
 You can call the `importColorList` method to bring up a dialog for picking a single ACO or ASE file.
 ```kotlin
 AdobeColorTool(this).importColorList(this, object: AdobeColorTool.AdobeImportListener {
-    override fun onComplete(colors: List<AdobeColor>) {
+    override fun onComplete(colors: Map<String, List<AdobeColor>>) {
         /* Your code */
     }
 
@@ -71,7 +71,9 @@ AdobeColorTool(this).importColorList(this, object: AdobeColorTool.AdobeImportLis
     }
 })
 ```
-The selected file will automatically be analyzed, whether it is a ACO or ASE file and you get back a object of type `List<AdobeColor>` in the `onComplete` callback method.
+The selected file will automatically be analyzed, whether it is a ACO or ASE file and you get back a object of type `Map<String, List<AdobeColor>>` in the `onComplete` callback method.
+The map will contain key value pairs, which stand for all imported color groups. The key is the group name and the value is a list of type `AdobeColor` with the actual color values.
+An import of the ACO format will result in a single color group with the name `ACO Import`, containing all color values.
 
 ## More in-depth technical information
 The following remarks are based on the following data:
