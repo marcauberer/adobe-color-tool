@@ -1,0 +1,9 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+
+com.chillibits.adobecolor.core
+com.chillibits.adobecolor.generator
+com.chillibits.adobecolor.model
+com.chillibits.adobecolor.parser
+com.chillibits.adobecolor.tool
+
