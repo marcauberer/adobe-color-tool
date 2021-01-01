@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © Marc Auberer 2021. All rights reserved
+  -->
+
+<resources>
+    <string name="app_name">Adobe Color</string>
+    <string name="export_colors_aco">Farben als ACO exportieren</string>
+    <string name="export_colors_ase">Farben als ASE exportieren</string>
+    <string name="import_colors">Farben importieren</string>
+    <string name="import_completed">Import abgeschlossen</string>
+    <string name="import_cancelled">Import abgebrochen</string>
+    <string name="import_failed">Import aufgrund eines Fehlers fehlgeschlagen</string>
+</resources>

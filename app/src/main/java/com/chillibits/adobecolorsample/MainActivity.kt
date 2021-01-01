@@ -1,5 +1,5 @@
 /*
- * Copyright © Marc Auberer 2020. All rights reserved
+ * Copyright © Marc Auberer 2021. All rights reserved
  */
 
 package com.chillibits.adobecolorsample
@@ -105,9 +105,6 @@ class MainActivity : AppCompatActivity() {
         AdobeColorTool(this).importColorList(this, object: AdobeColorTool.AdobeImportListener {
             override fun onComplete(colors: Map<String, List<AdobeColor>>) {
                 Log.d("AC", colors.toString())
-                Log.d("AC", colors["ACO Import"]?.get(0)?.color?.red.toString())
-                Log.d("AC", colors["ACO Import"]?.get(0)?.color?.green.toString())
-                Log.d("AC", colors["ACO Import"]?.get(0)?.color?.blue.toString())
 
                 Toast.makeText(this@MainActivity, R.string.import_completed, Toast.LENGTH_SHORT).show()
             }
