@@ -25,6 +25,8 @@ fun from4Bytes(b_8: Byte, b_4: Byte, b_2: Byte, b_1: Byte) =
 
 fun Float.to4Bytes(): ByteArray = ByteBuffer.allocate(4).putFloat(this).array()
 
+fun ByteArray.toFloat() = ByteBuffer.wrap(this).float
+
 fun ByteArray.printBytesPretty() = StringBuilder().apply {
     append("[ ")
     for (b in this@printBytesPretty) append(String.format("0x%02X ", b))

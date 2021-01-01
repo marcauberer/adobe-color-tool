@@ -100,10 +100,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun importColors() {
         AdobeColorTool(this).importColorList(this, object: AdobeColorTool.AdobeImportListener {
-            override fun onComplete(colors: List<AdobeColor>) {
-                Log.d("AC", colors[0].name)
-                Log.d("AC", colors[1].name)
-                Log.d("AC", colors[2].name)
+            override fun onComplete(colors: Map<String, List<AdobeColor>>) {
+                Log.d("AC", colors.toString())
 
                 Toast.makeText(this@MainActivity, R.string.import_completed, Toast.LENGTH_SHORT).show()
             }

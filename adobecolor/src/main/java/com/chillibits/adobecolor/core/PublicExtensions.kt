@@ -17,14 +17,16 @@ import com.chillibits.adobecolor.parser.ASEBinaryParser
  * Extension function for ByteArray to convert it to a color list, using the ACO or ASE encoding.
  * Which one is used, will be determined automatically
  */
-fun ByteArray.toColorList(): List<AdobeColor>? {
+fun ByteArray.toColorList(): Map<String, List<AdobeColor>>? {
     val acoParser = ACOBinaryParser(this)
     val aseParser = ASEBinaryParser(this)
     // Determine if it is a ACO or ASE encoded byte array or something other
     if (acoParser.isACO(this)) {
         // ACO format
         Log.i("AC", "ACO detected")
-        return acoParser.parse()
+        val result = HashMap<String, List<AdobeColor>>()
+        result["ACO Import"] = acoParser.parse()
+        return result
     } else if(aseParser.isASE(this)) {
         // ASE format
         Log.i("AC", "ASE detected")

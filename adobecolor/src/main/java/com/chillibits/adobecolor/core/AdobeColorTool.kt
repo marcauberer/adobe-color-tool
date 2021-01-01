@@ -9,6 +9,7 @@ import android.content.Intent
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
+import androidx.core.net.toFile
 import com.chillibits.adobecolor.R
 import com.chillibits.adobecolor.model.AdobeColor
 import com.chillibits.adobecolor.tool.printBytesPretty
@@ -29,7 +30,7 @@ class AdobeColorTool(
     }
 
     interface AdobeImportListener {
-        fun onComplete(colors: List<AdobeColor>)
+        fun onComplete(colors: Map<String, List<AdobeColor>>)
         fun onCancel() {}
     }
 
@@ -92,9 +93,7 @@ class AdobeColorTool(
                 result?.data?.data?.let {
                     activity.contentResolver.openInputStream(it)?.let { data ->
                         val bytes = getBytes(data)
-                        bytes.toColorList()?.let { list ->
-                            listener.onComplete(list)
-                        }
+                        bytes.toColorList()?.let { list -> listener.onComplete(list) }
                         listener.onCancel()
                     }
 

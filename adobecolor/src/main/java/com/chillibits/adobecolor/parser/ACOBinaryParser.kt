@@ -22,11 +22,6 @@ class ACOBinaryParser(data: ByteArray) {
     private var stack = data
     private val colors = ArrayList<AdobeColor>()
 
-    enum class ProtocolVersion(val value: Int) {
-        V1(1),
-        V2(2)
-    }
-
     enum class ColorSpace(val value: Int) {
         RGB(0),
         HSB(1),
