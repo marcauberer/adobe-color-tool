@@ -37,21 +37,45 @@ class AdobeColorTool(
 
     // ------------------------------------------- Export ------------------------------------------
 
+    /**
+     * Exports a list of colors as ACO file without setting a custom palette name.
+     * The resulting file will have the name export.aco
+     *
+     * @param colors List of colors to be exported
+     */
     fun exportColorListAsACO(colors: List<AdobeColor>) {
         val bytes = colors.toACOBytes()
         writeToFileAndShare(bytes, "export", EXT.ACO)
     }
 
+    /**
+     * Exports a list of colors as ACO file with a custom palette name
+     *
+     * @param colors List of colors to be exported
+     * @param paletteName Name that will be set as file name
+     */
     fun exportColorListAsACO(colors: List<AdobeColor>, paletteName: String) {
         val bytes = colors.toACOBytes()
         writeToFileAndShare(bytes, paletteName, EXT.ACO)
     }
 
+    /**
+     * Exports a list of colors as ASE file without setting a custom palette name.
+     * The resulting file will have the name export.ase
+     *
+     * @param colors List of colors to be exported
+     */
     fun exportColorListAsASE(colors: List<AdobeColor>) {
         val bytes = colors.toASEBytes()
         writeToFileAndShare(bytes, "export", EXT.ASE)
     }
 
+    /**
+     * Exports a list of colors as ASE file with a custom palette name
+     *
+     * @param colors List of colors to be exported
+     * @param paletteName Name that will be set as palette and file name
+     */
     fun exportColorListAsASE(colors: List<AdobeColor>, paletteName: String) {
         val bytes = colors.toASEBytes(paletteName)
         writeToFileAndShare(bytes, paletteName, EXT.ASE)
@@ -73,10 +97,7 @@ class AdobeColorTool(
                 putExtra(Intent.EXTRA_STREAM, uri)
             }
             context.startActivity(
-                Intent.createChooser(
-                    i,
-                    context.getString(R.string.export_adobe_palette)
-                )
+                Intent.createChooser(i, context.getString(R.string.export_adobe_palette))
             )
         } catch (e: IOException) {
             Log.e("Exception", "File write failed: $e")
@@ -85,6 +106,10 @@ class AdobeColorTool(
 
     // ------------------------------------------- Import ------------------------------------------
 
+    /**
+     * Function to open up a file picker and import colors from the selected file.
+     * Valid file extensions are: .aco, .ase
+     */
     fun importColorList(activity: AppCompatActivity, listener: AdobeImportListener) {
         val i = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             type = "application/octet-stream"
@@ -103,7 +128,6 @@ class AdobeColorTool(
                             return
                         } catch (e: Exception) { listener.onError(e) }
                     }
-
                 }
                 listener.onCancel()
             }

@@ -15,7 +15,7 @@ android {
         applicationId "com.chillibits.adobecolorsample"
         minSdkVersion 19
         targetSdkVersion 30
-        versionCode 1
+        versionCode library_version_code
         versionName library_version
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
