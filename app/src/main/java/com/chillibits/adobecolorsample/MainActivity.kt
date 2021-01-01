@@ -106,6 +106,10 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this@MainActivity, R.string.import_completed, Toast.LENGTH_SHORT).show()
             }
 
+            override fun onError(e: Exception) {
+                Toast.makeText(this@MainActivity, R.string.import_failed, Toast.LENGTH_SHORT).show()
+            }
+
             override fun onCancel() {
                 Toast.makeText(this@MainActivity, R.string.import_cancelled, Toast.LENGTH_SHORT).show()
             }

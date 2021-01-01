@@ -31,6 +31,7 @@ class AdobeColorTool(
 
     interface AdobeImportListener {
         fun onComplete(colors: Map<String, List<AdobeColor>>)
+        fun onError(e: Exception)
         fun onCancel() {}
     }
 
@@ -92,9 +93,15 @@ class AdobeColorTool(
             override fun onSuccess(result: Result?) {
                 result?.data?.data?.let {
                     activity.contentResolver.openInputStream(it)?.let { data ->
-                        val bytes = getBytes(data)
-                        bytes.toColorList()?.let { list -> listener.onComplete(list) }
-                        listener.onCancel()
+                        try {
+                            val bytes = getBytes(data)
+                            bytes.toColorList()?.let { list ->
+                                listener.onComplete(list)
+                                return
+                            }
+                            listener.onError(Exception("Wrong file type"))
+                            return
+                        } catch (e: Exception) { listener.onError(e) }
                     }
 
                 }

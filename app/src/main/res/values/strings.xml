@@ -9,4 +9,5 @@
     <string name="import_colors">Import Colors</string>
     <string name="import_completed">Import completed</string>
     <string name="import_cancelled">Import cancelled</string>
+    <string name="import_failed">Import failed due to an error</string>
 </resources>
