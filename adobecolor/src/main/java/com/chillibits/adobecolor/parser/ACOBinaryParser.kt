@@ -87,12 +87,13 @@ class ACOBinaryParser(data: ByteArray) {
         pop2BytesFront() // Constant 0
         val nameLength = pop2BytesFront()
         var name = ""
-        for (i in 0 until nameLength) name += String(pop2BytesFrontByteArray(), Charsets.UTF_16)
+        for (i in 0 until nameLength -1) name += String(pop2BytesFrontByteArray(), Charsets.UTF_16)
+        pop2BytesFront()
         colors.add(AdobeColor(color, name))
     }
 
     private fun pop1ByteFront(): Int {
-        val value = stack[0].toInt()
+        val value = stack[0].toUByte().toInt()
         stack = stack.sliceArray(1 until stack.size)
         return value
     }

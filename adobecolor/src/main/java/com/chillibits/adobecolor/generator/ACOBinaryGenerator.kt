@@ -67,8 +67,9 @@ class ACOBinaryGenerator {
         result += listOf(color.blue.toByte(), color.blue.toByte()).toByteArray() // y = blue
         result += 0.to2Bytes() // z = 0 (Has a value on other color spaces than RGB)
         result += 0.to2Bytes() // 0 (constant)
-        result += name.length.to2Bytes() // Name length
+        result += (name.length +1).to2Bytes() // Name length
         for (c in name) result += c.toInt().to2Bytes() // Name
+        result += 0.to2Bytes() // 0 (constant)
         return result
     }
 }

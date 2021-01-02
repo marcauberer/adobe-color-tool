@@ -46,9 +46,11 @@ class MainActivity : AppCompatActivity() {
 
         // Prepare colors
         colors = listOf(
-            AdobeColor(getIntFromRGB(173, 13, 52), "ad0d34"),
-            AdobeColor(getIntFromRGB(199, 122, 49), "c77a31"),
-            AdobeColor(getIntFromRGB(241, 15, 107), "f10f6b")
+            AdobeColor(getIntFromRGB(34, 195, 117), "Mittleres Seegrün"),
+            AdobeColor(getIntFromRGB(37, 106, 145), "Entenbraun")
+            //AdobeColor(getIntFromRGB(173, 13, 52), "ad0d34"),
+            //AdobeColor(getIntFromRGB(199, 122, 49), "c77a31"),
+            //AdobeColor(getIntFromRGB(241, 15, 107), "f10f6b")
         )
         Log.d("AC", "ACO: " + colors.toACOBytes().printBytesPretty())
         Log.d("AC", "ASE: " + colors.toASEBytes("Imaginary").printBytesPretty())
