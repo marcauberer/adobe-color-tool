@@ -30,7 +30,7 @@ class AdobeColorTool(
     }
 
     interface AdobeImportListener {
-        fun onComplete(colors: Map<String, List<AdobeColor>>)
+        fun onComplete(groups: Map<String, List<AdobeColor>>)
         fun onError(e: Exception)
         fun onCancel() {}
     }

@@ -48,15 +48,6 @@ class MainActivity : AppCompatActivity() {
         // Initialize toolbar
         setSupportActionBar(findViewById(R.id.toolbar))
 
-        // Prepare colors
-        for (i in 0..(random.nextInt(4) +1)) {
-            val randomColor = getRandomColor()
-            val name = "%06X".format(0xFFFFFF and randomColor).toUpperCase(Locale.getDefault())
-            colors.add(AdobeColor(randomColor, name))
-        }
-        Log.d("AC", "ACO: " + colors.toACOBytes().printBytesPretty())
-        Log.d("AC", "ASE: " + colors.toASEBytes("Imaginary").printBytesPretty())
-
         // Set ClickListeners
         findViewById<Button>(R.id.exportColorsACO).setOnClickListener {
             if (ContextCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
@@ -81,11 +72,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Initialize RecyclerView
-        colorAdapter = ColorAdapter(this, colors)
+        colorAdapter = ColorAdapter(this)
         findViewById<RecyclerView>(R.id.recyclerView).apply {
             layoutManager = LinearLayoutManager(context)
             adapter = colorAdapter
         }
+
+        // Prepare colors
+        generateRandomColors()
+        Log.d("AC", "ACO: " + colors.toACOBytes().printBytesPretty())
+        Log.d("AC", "ASE: " + colors.toASEBytes("Imaginary").printBytesPretty())
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -96,6 +92,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_github -> openGitHub()
+            R.id.action_refresh -> generateRandomColors()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -126,8 +123,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun importColors() {
         AdobeColorTool(this).importColorList(this, object : AdobeColorTool.AdobeImportListener {
-            override fun onComplete(colors: Map<String, List<AdobeColor>>) {
+            override fun onComplete(groups: Map<String, List<AdobeColor>>) {
                 Log.d("AC", colors.toString())
+
+                colors.clear()
+                groups.forEach { colors.addAll(it.value) }
+                colorAdapter.updateData(colors)
 
                 Toast.makeText(this@MainActivity, R.string.import_completed, Toast.LENGTH_SHORT).show()
             }
@@ -144,13 +145,23 @@ class MainActivity : AppCompatActivity() {
 
     private fun getIntFromRGB(red: Int, green: Int, blue: Int) = Color.rgb(red, green, blue)
 
+    private fun generateRandomColors() {
+        colors.clear()
+        for (i in 0..(random.nextInt(5) +2)) { // Min 2, max 7 colors
+            val randomColor = getRandomColor()
+            val name = "%06X".format(0xFFFFFF and randomColor).toUpperCase(Locale.getDefault())
+            colors.add(AdobeColor(randomColor, name))
+        }
+        colorAdapter.updateData(colors)
+    }
+
     private fun openGitHub() {
         startActivity(Intent(Intent.ACTION_VIEW).apply {
             data = Uri.parse("https://github.com/marcauberer/adobe-color-tool")
         })
     }
 
-    fun getRandomColor(): Int {
+    private fun getRandomColor(): Int {
         val red = random.nextInt(256)
         val green = random.nextInt(256)
         val blue = random.nextInt(256)

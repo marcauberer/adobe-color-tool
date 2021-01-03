@@ -20,12 +20,15 @@ import java.util.*
 import kotlin.math.max
 import kotlin.math.roundToInt
 
-class ColorAdapter(
-        private val context: Context,
-        private val colors: List<AdobeColor>
-): RecyclerView.Adapter<ColorAdapter.ViewHolder>() {
+class ColorAdapter(private val context: Context): RecyclerView.Adapter<ColorAdapter.ViewHolder>() {
 
+    // Variables as objects
+    private var colors = emptyList<AdobeColor>()
 
+    fun updateData(colors: List<AdobeColor>) {
+        this.colors = colors
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(context).inflate(R.layout.item_color, parent, false)

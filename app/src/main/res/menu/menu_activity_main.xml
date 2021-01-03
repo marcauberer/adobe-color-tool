@@ -8,8 +8,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/action_refresh"
+        android:title="@string/view_on_github"
+        android:icon="@drawable/refresh"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/action_github"
         android:title="@string/view_on_github"
-        android:icon="@drawable/ic_github"
-        app:showAsAction="always" />
+        android:icon="@drawable/github"
+        app:showAsAction="ifRoom" />
 </menu>
