@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © Marc Auberer 2021. All rights reserved
+  -->
+
+<resources>
+    <string name="color_summary" translatable="false">RGB(%1$s, %2$s, %3$s) • HEX: #%4$s • HSV(%5$s, %6$s, %7$s) • CMYK(%8$s%%, %9$s%%, %10$s%%, %11$s%%)</string>
+</resources>

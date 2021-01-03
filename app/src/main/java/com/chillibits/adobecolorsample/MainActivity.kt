@@ -11,6 +11,7 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.provider.SyncStateContract
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -19,11 +20,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.chillibits.adobecolor.core.AdobeColorTool
 import com.chillibits.adobecolor.core.toACOBytes
 import com.chillibits.adobecolor.core.toASEBytes
 import com.chillibits.adobecolor.model.AdobeColor
 import com.chillibits.adobecolor.tool.printBytesPretty
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,7 +37,9 @@ class MainActivity : AppCompatActivity() {
     private val PERMISSON_IMPORT = 10003
 
     // Variables as objects
-    private lateinit var colors: List<AdobeColor>
+    private val colors = ArrayList<AdobeColor>()
+    private val random = Random(System.currentTimeMillis())
+    private lateinit var colorAdapter: ColorAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,11 +49,11 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
 
         // Prepare colors
-        colors = listOf(
-                AdobeColor(getIntFromRGB(173, 13, 52), "ad0d34"),
-                AdobeColor(getIntFromRGB(199, 122, 49), "c77a31"),
-                AdobeColor(getIntFromRGB(241, 15, 107), "f10f6b")
-        )
+        for (i in 0..(random.nextInt(4) +1)) {
+            val randomColor = getRandomColor()
+            val name = "%06X".format(0xFFFFFF and randomColor).toUpperCase(Locale.getDefault())
+            colors.add(AdobeColor(randomColor, name))
+        }
         Log.d("AC", "ACO: " + colors.toACOBytes().printBytesPretty())
         Log.d("AC", "ASE: " + colors.toASEBytes("Imaginary").printBytesPretty())
 
@@ -72,6 +78,13 @@ class MainActivity : AppCompatActivity() {
             } else {
                 ActivityCompat.requestPermissions(this, arrayOf(READ_EXTERNAL_STORAGE), PERMISSON_IMPORT)
             }
+        }
+
+        // Initialize RecyclerView
+        colorAdapter = ColorAdapter(this, colors)
+        findViewById<RecyclerView>(R.id.recyclerView).apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = colorAdapter
         }
     }
 
@@ -135,5 +148,12 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(Intent.ACTION_VIEW).apply {
             data = Uri.parse("https://github.com/marcauberer/adobe-color-tool")
         })
+    }
+
+    fun getRandomColor(): Int {
+        val red = random.nextInt(256)
+        val green = random.nextInt(256)
+        val blue = random.nextInt(256)
+        return Color.rgb(red, green, blue)
     }
 }

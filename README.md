@@ -8,7 +8,7 @@
 Adobe Color Tool is a library for transforming lists of colors to binary strings / byte arrays in Adobe ACO / ASE format.
 
 ## Try it
-If you want to test the library, please visit the sample app on [Google Play](https://play.google.com/store/apps/details?id=com.chillibits.adobecolortoolsample)!
+If you want to test the library, please visit the sample app on [Google Play](https://play.google.com/store/apps/details?id=com.chillibits.adobecolorsample)!
 
 ## Usage
 The first step for using this library is, to add it to the dependency section in your project:

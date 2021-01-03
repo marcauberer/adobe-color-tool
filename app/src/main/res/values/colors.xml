@@ -13,4 +13,5 @@
     <color name="colorOnBackground">#000000</color>
     <color name="colorOnError">#810000</color>
     <color name="colorOnSurface">@color/colorPrimaryVariant</color>
+    <color name="grayLight">#BBB</color>
 </resources>
