@@ -10,6 +10,9 @@ Adobe Color Tool is a library for transforming lists of colors to binary strings
 ## Try it
 If you want to test the library, please visit the sample app on [Google Play](https://play.google.com/store/apps/details?id=com.chillibits.adobecolorsample)!
 
+## Screenshots (Android 11)
+<img src="https://github.com/marcauberer/adobe-color-tool/raw/main/media/screenshots/screen1.png" width="205" title="Screenshot 1"> <img src="https://github.com/marcauberer/adobe-color-tool/raw/main/media/screenshots/screen2.png" width="205" title="Screenshot 2"> <img src="https://github.com/marcauberer/adobe-color-tool/raw/main/media/screenshots/screen3.png" width="205" title="Screenshot 3"> <img src="https://github.com/marcauberer/adobe-color-tool/raw/main/media/screenshots/screen4.png" width="205" title="Screenshot 4">
+
 ## Usage
 The first step for using this library is, to add it to the dependency section in your project:
 ```gradle
