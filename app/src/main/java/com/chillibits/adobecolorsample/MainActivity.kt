@@ -124,8 +124,6 @@ class MainActivity : AppCompatActivity() {
     private fun importColors() {
         AdobeColorTool(this).importColorList(this, object : AdobeColorTool.AdobeImportListener {
             override fun onComplete(groups: Map<String, List<AdobeColor>>) {
-                Log.d("AC", colors.toString())
-
                 colors.clear()
                 groups.forEach { colors.addAll(it.value) }
                 colorAdapter.updateData(colors)
@@ -147,7 +145,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun generateRandomColors() {
         colors.clear()
-        for (i in 0..(random.nextInt(5) +2)) { // Min 2, max 7 colors
+        for (i in 0..(random.nextInt(8) +2)) { // Min 2, max 10 colors
             val randomColor = getRandomColor()
             val name = "%06X".format(0xFFFFFF and randomColor).toUpperCase(Locale.getDefault())
             colors.add(AdobeColor(randomColor, name))
