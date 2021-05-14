@@ -16,19 +16,9 @@ If you want to test the library, please visit the sample app on [Google Play](ht
 ## Usage
 The first step for using this library is, to add it to the dependency section in your project:
 
-Add repository to build.gradle file on project level:
-```gradle
-allprojects {
-    repositories {
-        ...
-        maven { url "https://repo.chillibits.com/artifactory/android" }
-    }
-}
-```
-
 Add dependencies to build.gradle file on module level (e.g. app/build.gradle):
 ```gradle
-implementation 'com.chillibits:adobecolortool:1.0.0'
+implementation 'com.chillibits:adobecolortool:1.0.1'
 ```
 Also you have to declare a file provider in your manifest, which should look similar to this one:
 ```xml
