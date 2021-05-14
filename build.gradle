@@ -3,19 +3,19 @@
  */
 
 buildscript {
-    ext.library_version = '1.0.0'
-    ext.library_version_code = 1000
-    ext.kotlin_version = "1.4.21-2"
+    ext {
+        libraryVersion = "$VERSION"
+        libraryVersionCode = Integer.parseInt(rootProject.properties["VERSION_CODE"])
+        kotlinVersion = '1.4.32'
+    }
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.2'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.5'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
-        classpath 'org.jetbrains.dokka:dokka-gradle-plugin:1.4.20'
+        classpath 'com.android.tools.build:gradle:4.2.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath 'org.jetbrains.dokka:dokka-gradle-plugin:1.4.32'
     }
 }
 
