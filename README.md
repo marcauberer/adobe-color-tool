@@ -1,5 +1,5 @@
 # Adobe Color Tool Library for Android
-[![Download](https://api.bintray.com/packages/marcauberer/adobecolortool/com.chillibits%3Aadobecolortool/images/download.svg)](https://bintray.com/marcauberer/adobecolortool/com.chillibits%3Aadobecolortool/_latestVersion)
+[![Maven Central](https://img.shields.io/maven-central/v/com.chillibits/adobecolortool.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.chillibits%22%20AND%20a:%22adobecolortool%22)
 ![Android CI](https://github.com/marcauberer/adobe-color-tool/workflows/Android%20CI/badge.svg)
 [![API](https://img.shields.io/badge/API-19%2B-red.svg?style=flat)](https://android-arsenal.com/api?level=19)
 [![Article on Medium](https://aleen42.github.io/badges/src/medium.svg)](https://medium.com/p/d29e43fde8eb)
