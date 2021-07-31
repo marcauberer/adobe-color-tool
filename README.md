@@ -18,7 +18,7 @@ The first step for using this library is, to add it to the dependency section in
 
 Add dependencies to build.gradle file on module level (e.g. app/build.gradle):
 ```gradle
-implementation 'com.chillibits:adobecolortool:1.0.1'
+implementation 'com.chillibits:adobecolortool:1.0.2'
 ```
 Also you have to declare a file provider in your manifest, which should look similar to this one:
 ```xml
@@ -77,7 +77,7 @@ AdobeColorTool(this).importColorList(this, object: AdobeColorTool.AdobeImportLis
     }
 })
 ```
-The selected file will automatically be analyzed, whether it is a ACO or ASE file and you get back a object of type `Map<String, List<AdobeColor>>` in the `onComplete` callback method.
+The selected file will automatically be analyzed, whether it is a ACO or ASE file and you get back an object of type `Map<String, List<AdobeColor>>` in the `onComplete` callback method.
 The map will contain key value pairs, which represents all imported color groups. The key is the group name and the value is a list of type `AdobeColor` with the actual color values.
 An import of the ACO format will result in a single color group with the name `ACO Import`, containing all color values.
 
