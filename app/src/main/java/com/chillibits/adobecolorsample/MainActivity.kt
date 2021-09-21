@@ -11,7 +11,6 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.provider.SyncStateContract
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -147,7 +146,7 @@ class MainActivity : AppCompatActivity() {
         colors.clear()
         for (i in 0..(random.nextInt(8) +2)) { // Min 2, max 10 colors
             val randomColor = getRandomColor()
-            val name = "%06X".format(0xFFFFFF and randomColor).toUpperCase(Locale.getDefault())
+            val name = "%06X".format(0xFFFFFF and randomColor).uppercase()
             colors.add(AdobeColor(randomColor, name))
         }
         colorAdapter.updateData(colors)
