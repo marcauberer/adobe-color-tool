@@ -64,7 +64,7 @@ class ASEBinaryGenerator {
         var result = BlockType.GROUP_START.value.to2Bytes() // Block type
         result += blockLength.to4Bytes() // Block length
         result += nameLength.to2Bytes() // Name length
-        for (c in name) result += c.toInt().to2Bytes() // Group name
+        for (c in name) result += c.code.to2Bytes() // Group name
         result += ByteArray(2) // Group name ending
         return result
     }
@@ -97,7 +97,7 @@ class ASEBinaryGenerator {
         var result = BlockType.COLOR.value.to2Bytes() // Block type
         result += blockLength.to4Bytes() // Block length
         result += nameLength.to2Bytes() // Name length
-        for (c in name) result += c.toInt().to2Bytes() // Color name
+        for (c in name) result += c.code.to2Bytes() // Color name
         result += ByteArray(1)
         result += colorModel // Color model
         result += (color.red / 255f).to4Bytes() // Color value red

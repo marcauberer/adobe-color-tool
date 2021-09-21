@@ -68,7 +68,7 @@ class ACOBinaryGenerator {
         result += 0.to2Bytes() // z = 0 (Has a value on other color spaces than RGB)
         result += 0.to2Bytes() // 0 (constant)
         result += (name.length +1).to2Bytes() // Name length
-        for (c in name) result += c.toInt().to2Bytes() // Name
+        for (c in name) result += c.code.to2Bytes() // Name
         result += 0.to2Bytes() // 0 (constant)
         return result
     }

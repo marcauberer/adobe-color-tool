@@ -5,11 +5,9 @@
 package com.chillibits.adobecolor.parser
 
 import android.graphics.Color
-import android.util.Log
 import com.chillibits.adobecolor.generator.ACOBinaryGenerator
 import com.chillibits.adobecolor.model.AdobeColor
 import com.chillibits.adobecolor.tool.from2Bytes
-import java.nio.charset.Charset
 
 /**
  * More information here:

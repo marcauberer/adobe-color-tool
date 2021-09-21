@@ -18,7 +18,7 @@ The first step for using this library is, to add it to the dependency section in
 
 Add dependencies to build.gradle file on module level (e.g. app/build.gradle):
 ```gradle
-implementation 'com.chillibits:adobecolortool:1.0.2'
+implementation 'com.chillibits:adobecolortool:1.0.3'
 ```
 Also you have to declare a file provider in your manifest, which should look similar to this one:
 ```xml
