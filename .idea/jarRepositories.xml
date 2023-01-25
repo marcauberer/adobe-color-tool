@@ -31,5 +31,10 @@
       <option name="name" value="artifactory-maven-resolver" />
       <option name="url" value="https://repo.chillibits.com/artifactory/android" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="MavenRepo" />
+      <option name="name" value="MavenRepo" />
+      <option name="url" value="https://repo.maven.apache.org/maven2/" />
+    </remote-repository>
   </component>
 </project>
