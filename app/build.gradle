@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId "com.chillibits.adobecolorsample"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 33
         versionCode libraryVersionCode
         versionName libraryVersion
